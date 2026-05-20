@@ -1,7 +1,102 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  background: #050816;
-  color: white;
-  font-family: Arial, sans-serif;
+export default function Home() {
+  return (
+    <main className="site">
+      <style>{`
+        body { margin:0; background:#050816; color:white; font-family: Arial, sans-serif; }
+        .site { min-height:100vh; background:#050816; }
+        .hero { padding:70px 6%; background:radial-gradient(circle at top left,#1e63ff55,transparent 35%), radial-gradient(circle at top right,#d8b45b33,transparent 30%), #050816; }
+        .nav { display:flex; justify-content:space-between; align-items:center; margin-bottom:70px; }
+        .brand { font-size:26px; font-weight:900; }
+        .tag { color:#8dc5ff; letter-spacing:4px; text-transform:uppercase; font-size:12px; margin-top:6px; }
+        .phone { background:#2f8cff; padding:14px 22px; border-radius:16px; color:white; text-decoration:none; font-weight:900; }
+        .grid { display:grid; grid-template-columns:1.1fr .9fr; gap:50px; align-items:center; }
+        h1 { font-size:76px; line-height:.95; margin:0; letter-spacing:-4px; }
+        p { color:#cbd5e1; font-size:20px; line-height:1.7; }
+        .buttons { display:flex; gap:18px; margin-top:35px; flex-wrap:wrap; }
+        .btn { background:#2f8cff; padding:18px 28px; border-radius:18px; color:white; text-decoration:none; font-weight:900; }
+        .btn2 { border:1px solid #ffffff55; background:#ffffff10; }
+        .card { background:#ffffff12; border:1px solid #ffffff20; border-radius:36px; overflow:hidden; box-shadow:0 30px 80px #00000055; }
+        .logoArea { background:white; color:#07122b; padding:50px; text-align:center; }
+        .logoTitle { font-size:58px; font-weight:900; letter-spacing:8px; }
+        .logoSub { color:#133a73; letter-spacing:5px; text-transform:uppercase; font-weight:800; }
+        .cardText { padding:35px; }
+        .services { padding:80px 6%; background:#08111f; }
+        .sectionTitle { font-size:48px; margin:0 0 18px; }
+        .serviceGrid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:40px; }
+        .service { background:#050816; border:1px solid #ffffff18; border-radius:28px; padding:30px; }
+        .service h3 { font-size:24px; margin:0 0 12px; }
+        .cta { padding:65px 6%; background:#2f8cff; color:#050816; display:flex; justify-content:space-between; align-items:center; gap:30px; }
+        .cta h2 { font-size:48px; margin:0; }
+        .cta p { color:#07122b; font-weight:800; }
+        .darkbtn { background:#050816; color:white; padding:18px 28px; border-radius:18px; text-decoration:none; font-weight:900; }
+        footer { padding:30px 6%; color:#94a3b8; display:flex; justify-content:space-between; gap:20px; }
+        @media(max-width:900px){ .grid,.serviceGrid,.cta,footer{grid-template-columns:1fr; display:block;} h1{font-size:48px;} .card{margin-top:40px;} }
+      `}</style>
+
+      <section className="hero">
+        <div className="nav">
+          <div>
+            <div className="brand">Mitchell</div>
+            <div className="tag">Carpet Cleaning & Restoration</div>
+          </div>
+          <a className="phone" href="tel:9728240752">972-824-0752</a>
+        </div>
+
+        <div className="grid">
+          <div>
+            <div className="tag">DFW Builder, Warranty & Homeowner Support</div>
+            <h1>Specialty floor care, water cleanup, and restoration support.</h1>
+            <p>
+              Mitchell Carpet Cleaning & Restoration helps DFW builders, warranty departments, and homeowners with professional carpet cleaning, water extraction, drying, odor removal, subfloor issues, and specialty repairs.
+            </p>
+            <div className="buttons">
+              <a className="btn" href="tel:9728240752">Call 972-824-0752</a>
+              <a className="btn btn2" href="mailto:mitchellrestorationdfw@gmail.com">Email Us</a>
+            </div>
+          </div>
+
+          <div className="card">
+            <div className="logoArea">
+              <div className="logoTitle">MITCHELL</div>
+              <div className="logoSub">Carpet Cleaning & Restoration</div>
+            </div>
+            <div className="cardText">
+              <h2>Experienced problem solvers for jobs that need extra care.</h2>
+              <p>
+                Shawn Mitchell brings 30+ years of hands-on experience solving flooring, carpet, water, odor, and warranty issues across DFW homes and builder communities.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="services">
+        <div className="tag">Services</div>
+        <h2 className="sectionTitle">The services builders and homeowners call us for.</h2>
+        <p>From routine carpet cleaning to urgent water extraction and specialty warranty work, we help keep projects moving and homeowners taken care of.</p>
+
+        <div className="serviceGrid">
+          <div className="service"><h3>Water Extraction & Drying</h3><p>Fast response for water damage, drying equipment, moisture checks, and builder warranty support.</p></div>
+          <div className="service"><h3>Carpet Cleaning</h3><p>Professional truck-mounted hot water extraction for homeowners, builders, and warranty teams.</p></div>
+          <div className="service"><h3>Carpet Repairs</h3><p>Stretching, seam repair, specialty flooring issues, subfloor pops, creaks, and difficult repairs.</p></div>
+          <div className="service"><h3>Moisture & Mold Prevention</h3><p>Thermal imaging, moisture detection, mold detection support, and preventative treatment options.</p></div>
+          <div className="service"><h3>Odor Removal</h3><p>Dead animal odor removal, ozone treatment, air scrubbers, and deodorizing solutions.</p></div>
+          <div className="service"><h3>Builder & Warranty Support</h3><p>Reliable vendor support for construction managers, warranty teams, and customer care departments.</p></div>
+        </div>
+      </section>
+
+      <section className="cta">
+        <div>
+          <h2>Ready when you need us.</h2>
+          <p>Fast communication, dependable service, and professional results across DFW.</p>
+        </div>
+        <a className="darkbtn" href="tel:9728240752">Call Now</a>
+      </section>
+
+      <footer>
+        <div>© Mitchell Carpet Cleaning & Restoration LLC</div>
+        <div>972-824-0752 · mitchellrestorationdfw@gmail.com</div>
+      </footer>
+    </main>
+  );
 }
