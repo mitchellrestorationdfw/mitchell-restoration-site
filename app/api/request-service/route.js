@@ -26,14 +26,14 @@ export async function POST(request) {
       return Response.json({ error: 'Please enter a valid email address.' }, { status: 400 })
     }
 
-    if (!process.env.RESEND_API_KEY || !process.env.RESEND_FROM_EMAIL) {
+    if (!process.env.RESEND_API_KEY) {
       return Response.json({ error: 'Email service is not configured. Please call 972-824-0752.' }, { status: 500 })
     }
 
     const resend = new Resend(process.env.RESEND_API_KEY)
     const { error } = await resend.emails.send(
       {
-        from: process.env.RESEND_FROM_EMAIL || 'MCCR Website <onboarding@resend.dev>',
+        from: 'MCCR Website <website@mitchellrestorationdfw.com>',
         to: [recipient],
         replyTo: email || undefined,
         subject: `New service request from ${name}`,
