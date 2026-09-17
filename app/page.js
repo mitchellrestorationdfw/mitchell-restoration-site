@@ -20,6 +20,36 @@ const benefits = [
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [formStatus, setFormStatus] = useState('idle')
+  const [formMessage, setFormMessage] = useState('')
+
+  async function handleServiceRequest(event) {
+    event.preventDefault()
+    setFormStatus('submitting')
+    setFormMessage('')
+
+    const form = event.currentTarget
+    const formData = new FormData(form)
+    const payload = Object.fromEntries(formData.entries())
+
+    try {
+      const response = await fetch('/api/request-service', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      const result = await response.json()
+
+      if (!response.ok) throw new Error(result.error)
+
+      form.reset()
+      setFormStatus('success')
+      setFormMessage('Thank you. We received your request and will contact you shortly.')
+    } catch (error) {
+      setFormStatus('error')
+      setFormMessage(error.message || 'We could not send your request right now. Please call 972-824-0752.')
+    }
+  }
 
   return (
     <main>
@@ -66,7 +96,7 @@ export default function Home() {
 
       <section className="final-cta"><div className="final-overlay" /><div className="final-content"><p className="eyebrow">READY WHEN YOU ARE</p><h2>LET&apos;S GET IT <em>DONE.</em></h2><p>Whether you need routine floor care, builder warranty support or help recovering from property damage, MCCR is ready to go to work.</p><div className="hero-actions"><a className="button button-gold" href="#contact">REQUEST A QUOTE <span>↗</span></a><a className="button button-outline" href="tel:9728240752">CALL 972-824-0752</a></div><div className="final-tag">CLEAN <span>•</span> RESTORE <span>•</span> PROTECT</div></div></section>
 
-      <section className="contact-section" id="contact"><div className="contact-intro"><p className="eyebrow">START A CONVERSATION</p><h2>TELL US WHAT<br /><em>YOU&apos;RE FACING.</em></h2><p>Send a few details and our team will follow up directly. For urgent water damage, call now.</p><a className="contact-phone" href="tel:9728240752">972-824-0752 <span>↗</span></a></div><form className="quote-form" onSubmit={(event) => event.preventDefault()}><div className="form-row"><label>Name<input required name="name" placeholder="Your name" /></label><label>Company / Builder<input name="company" placeholder="Company name" /></label></div><div className="form-row"><label>Phone<input required type="tel" name="phone" placeholder="972-000-0000" /></label><label>Email<input type="email" name="email" placeholder="you@company.com" /></label></div><label>Property Address<input name="address" placeholder="Street, city, ZIP" /></label><label>Service Needed<select name="service" defaultValue=""><option value="" disabled>Select a service</option><option>Water damage & extraction</option><option>Carpet cleaning & repair</option><option>Builder warranty support</option><option>Other restoration service</option></select></label><label>Tell Us What Happened<textarea name="details" rows="4" placeholder="Give us a quick overview of what you need..."></textarea></label><fieldset><legend>Preferred Contact Method</legend><label className="radio"><input type="radio" name="contact" defaultChecked /> Phone</label><label className="radio"><input type="radio" name="contact" /> Email</label><label className="radio"><input type="radio" name="contact" /> Text</label></fieldset><button className="button button-gold" type="submit">REQUEST SERVICE <span>↗</span></button></form></section>
+      <section className="contact-section" id="contact"><div className="contact-intro"><p className="eyebrow">START A CONVERSATION</p><h2>TELL US WHAT<br /><em>YOU&apos;RE FACING.</em></h2><p>Send a few details and our team will follow up directly. For urgent water damage, call now.</p><a className="contact-phone" href="tel:9728240752">972-824-0752 <span>↗</span></a></div><form className="quote-form" onSubmit={handleServiceRequest}><div className="form-row"><label>Name<input required name="name" placeholder="Your name" /></label><label>Company / Builder<input name="company" placeholder="Company name" /></label></div><div className="form-row"><label>Phone<input required type="tel" name="phone" placeholder="972-000-0000" /></label><label>Email<input type="email" name="email" placeholder="you@company.com" /></label></div><label>Property Address<input name="address" placeholder="Street, city, ZIP" /></label><label>Service Needed<select required name="service" defaultValue=""><option value="" disabled>Select a service</option><option>Water damage & extraction</option><option>Carpet cleaning & repair</option><option>Builder warranty support</option><option>Other restoration service</option></select></label><label>Tell Us What Happened<textarea name="details" rows="4" placeholder="Give us a quick overview of what you need..."></textarea></label><fieldset><legend>Preferred Contact Method</legend><label className="radio"><input type="radio" name="contactMethod" value="Phone" defaultChecked /> Phone</label><label className="radio"><input type="radio" name="contactMethod" value="Email" /> Email</label><label className="radio"><input type="radio" name="contactMethod" value="Text" /> Text</label></fieldset>{formMessage && <p className={`form-message ${formStatus}`} role="status" aria-live="polite">{formMessage}</p>}<button className="button button-gold" type="submit" disabled={formStatus === 'submitting'}>{formStatus === 'submitting' ? 'SENDING...' : 'REQUEST SERVICE'} <span>↗</span></button></form></section>
 
       <footer className="site-footer"><div className="footer-brand"><a className="brand" href="#top"><span className="brand-mark" aria-hidden="true"><b>M</b><i>★</i></span><span className="brand-lockup"><strong>MCCR</strong><small>MITCHELL RESTORATION</small></span></a><p>Dallas-Fort Worth, Texas</p></div><div className="footer-links"><a href="#services">Services</a><a href="#builders">Builder Services</a><a href="#about">About</a><a href="#service-area">Service Area</a><a href="#contact">Contact</a></div><div className="footer-contact"><a href="tel:9728240752">972-824-0752</a><a href="mailto:mitchellrestorationdfw@gmail.com">mitchellrestorationdfw@gmail.com</a></div><div className="footer-bottom"><span>© {new Date().getFullYear()} Mitchell Carpet Cleaning & Restoration</span><strong>CLEAN <i>•</i> RESTORE <i>•</i> PROTECT</strong></div></footer>
     </main>
