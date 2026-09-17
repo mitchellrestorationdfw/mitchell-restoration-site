@@ -1,357 +1,75 @@
+'use client'
+
+import { useState } from 'react'
+
+const services = [
+  ['01', 'Water Damage & Extraction', 'Water extraction, moisture detection, structural drying and equipment monitoring.', '⌁'],
+  ['02', 'Carpet Cleaning & Repair', 'Professional cleaning, stretching, seam repair and builder warranty service.', '▦'],
+  ['03', 'Tile, Laminate & LVP', 'Specialty cleaning and floor care for residential and new-construction properties.', '◇'],
+  ['04', 'Mold & Microbial Treatment', 'Moisture investigation, antimicrobial treatment and remediation support.', '◌'],
+  ['05', 'Odor Removal & Sanitization', 'Ozone treatment, odor control, sanitation and difficult property conditions.', '✧'],
+  ['06', 'Demolition & Restoration', 'Flood cuts, damaged material removal, baseboards, trim, insulation, subfloor and restoration support.', '▤'],
+]
+
+const benefits = [
+  ['RAPID RESPONSE', 'Fast communication when water, flooring or warranty problems cannot wait.'],
+  ['BUILDER EXPERIENCE', 'Hands-on experience working within production homebuilding environments and warranty processes.'],
+  ['CLEAR DOCUMENTATION', 'Moisture readings, job documentation, invoices and required field paperwork handled professionally.'],
+  ['ONE CALL. MULTIPLE SOLUTIONS.', 'Cleaning, extraction, drying, specialty flooring, odor, microbial treatment and restoration support from one field partner.'],
+]
+
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
-    <main className="site">
-      <style>{`
-        * { box-sizing: border-box; }
-        body { margin: 0; background: #050816; color: white; font-family: Arial, Helvetica, sans-serif; }
-        a { color: inherit; text-decoration: none; }
-        .site { min-height: 100vh; background: #050816; }
-        .hero {
-          position: relative;
-          overflow: hidden;
-          padding: 28px 6% 90px;
-          background:
-            radial-gradient(circle at 15% 20%, rgba(47,140,255,.55), transparent 32%),
-            radial-gradient(circle at 85% 15%, rgba(218,183,91,.28), transparent 28%),
-            linear-gradient(to bottom, #071126, #050816 85%);
-        }
-        .nav {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 80px;
-        }
-        .brandWrap { display: flex; align-items: center; gap: 16px; }
-        .mark {
-          width: 70px;
-          height: 70px;
-          border-radius: 20px;
-          background: white;
-          color: #071126;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 38px;
-          font-weight: 900;
-          box-shadow: 0 18px 45px rgba(0,0,0,.35);
-          border: 3px solid rgba(212,175,55,.85);
-        }
-        .brand { font-size: 25px; font-weight: 900; letter-spacing: .03em; }
-        .sub { color: #8dc5ff; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; margin-top: 5px; }
-        .phone {
-          background: #2f8cff;
-          padding: 15px 24px;
-          border-radius: 18px;
-          font-weight: 900;
-          box-shadow: 0 16px 35px rgba(47,140,255,.3);
-        }
-        .grid {
-          max-width: 1280px;
-          margin: 0 auto;
-          display: grid;
-          grid-template-columns: 1.08fr .92fr;
-          gap: 55px;
-          align-items: center;
-        }
-        .badge {
-          display: inline-flex;
-          padding: 10px 16px;
-          border-radius: 999px;
-          background: rgba(47,140,255,.14);
-          border: 1px solid rgba(141,197,255,.32);
-          color: #d7edff;
-          font-weight: 900;
-          margin-bottom: 26px;
-        }
-        h1 {
-          font-size: clamp(48px, 6.2vw, 86px);
-          line-height: .92;
-          letter-spacing: -.055em;
-          margin: 0;
-        }
-        .lead {
-          color: #d3dcea;
-          font-size: 20px;
-          line-height: 1.75;
-          max-width: 720px;
-          margin-top: 28px;
-        }
-        .actions { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 34px; }
-        .btn {
-          padding: 18px 28px;
-          border-radius: 18px;
-          background: #2f8cff;
-          font-weight: 900;
-          box-shadow: 0 18px 40px rgba(47,140,255,.25);
-        }
-        .btn.secondary {
-          background: rgba(255,255,255,.08);
-          border: 1px solid rgba(255,255,255,.2);
-          box-shadow: none;
-        }
-        .stats {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 14px;
-          margin-top: 42px;
-        }
-        .stat {
-          padding: 20px;
-          border-radius: 24px;
-          background: rgba(255,255,255,.065);
-          border: 1px solid rgba(255,255,255,.12);
-        }
-        .stat strong { display: block; font-size: 34px; color: #8dc5ff; }
-        .stat span { color: #cbd5e1; font-size: 14px; }
-        .card {
-          overflow: hidden;
-          border-radius: 38px;
-          background: rgba(255,255,255,.09);
-          border: 1px solid rgba(255,255,255,.14);
-          box-shadow: 0 30px 90px rgba(0,0,0,.45);
-          backdrop-filter: blur(18px);
-        }
-        .logoPanel {
-          background: white;
-          color: #071126;
-          padding: 54px 38px;
-          text-align: center;
-        }
-        .bigM {
-          width: 110px;
-          height: 110px;
-          border-radius: 30px;
-          margin: 0 auto 24px;
-          background: linear-gradient(135deg, #071126, #123f7b);
-          color: white;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 58px;
-          font-weight: 900;
-          border: 4px solid #d4af37;
-        }
-        .logoTitle {
-          font-size: 58px;
-          font-weight: 900;
-          letter-spacing: .12em;
-        }
-        .goldLine {
-          height: 2px;
-          width: 260px;
-          margin: 16px auto;
-          background: linear-gradient(to right, transparent, #d4af37, transparent);
-        }
-        .logoSub {
-          color: #133a73;
-          font-weight: 900;
-          letter-spacing: .28em;
-          text-transform: uppercase;
-          font-size: 14px;
-        }
-        .cardText { padding: 34px; }
-        .cardText h2 { font-size: 34px; line-height: 1.05; margin: 0; }
-        .cardText p { color: #cbd5e1; font-size: 17px; line-height: 1.7; }
-        .services {
-          padding: 85px 6%;
-          background: #08111f;
-        }
-        .sectionHead { max-width: 900px; margin: 0 auto 45px; text-align: center; }
-        .eyebrow { color: #8dc5ff; letter-spacing: .28em; text-transform: uppercase; font-weight: 900; font-size: 13px; }
-        .sectionHead h2 { font-size: clamp(38px, 5vw, 58px); margin: 14px 0; line-height: 1; }
-        .sectionHead p { color: #cbd5e1; font-size: 18px; line-height: 1.7; }
-        .serviceGrid {
-          max-width: 1280px;
-          margin: 0 auto;
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 22px;
-        }
-        .service {
-          padding: 30px;
-          border-radius: 30px;
-          background: rgba(5,8,22,.84);
-          border: 1px solid rgba(255,255,255,.12);
-          min-height: 245px;
-          box-shadow: 0 20px 55px rgba(0,0,0,.22);
-        }
-        .icon {
-          width: 54px;
-          height: 54px;
-          border-radius: 18px;
-          background: rgba(47,140,255,.16);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #8dc5ff;
-          font-size: 26px;
-          margin-bottom: 20px;
-        }
-        .service h3 { font-size: 23px; margin: 0 0 12px; }
-        .service p { color: #cbd5e1; line-height: 1.65; margin: 0; }
-        .split {
-          max-width: 1280px;
-          margin: 0 auto;
-          padding: 85px 6%;
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 28px;
-        }
-        .panel {
-          border-radius: 38px;
-          padding: 42px;
-          background: rgba(255,255,255,.075);
-          border: 1px solid rgba(255,255,255,.12);
-          box-shadow: 0 25px 75px rgba(0,0,0,.25);
-        }
-        .panel.blue {
-          background: linear-gradient(145deg, rgba(47,140,255,.22), rgba(255,255,255,.06));
-        }
-        .panel h2 { font-size: 44px; line-height: 1; margin: 14px 0 18px; }
-        .panel p { color: #cbd5e1; line-height: 1.7; font-size: 17px; }
-        .panel ul { padding: 0; list-style: none; margin-top: 26px; }
-        .panel li {
-          margin: 12px 0;
-          padding: 16px;
-          border-radius: 17px;
-          background: rgba(5,8,22,.52);
-          font-weight: 800;
-          color: #e5edf8;
-        }
-        .cta {
-          padding: 70px 6%;
-          background: #2f8cff;
-          color: #050816;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 30px;
-        }
-        .cta h2 { font-size: 54px; margin: 0; line-height: 1; }
-        .cta p { font-size: 19px; font-weight: 800; color: #071126; }
-        .darkBtn {
-          background: #050816;
-          color: white;
-          padding: 18px 30px;
-          border-radius: 18px;
-          font-weight: 900;
-          display: inline-flex;
-        }
-        footer {
-          padding: 34px 6%;
-          color: #94a3b8;
-          display: flex;
-          justify-content: space-between;
-          gap: 20px;
-          border-top: 1px solid rgba(255,255,255,.1);
-        }
-        @media(max-width: 900px) {
-          .nav { align-items: flex-start; gap: 20px; }
-          .grid, .serviceGrid, .split { grid-template-columns: 1fr; }
-          .stats { grid-template-columns: 1fr; }
-          .cta, footer { flex-direction: column; align-items: flex-start; }
-          .logoTitle { font-size: 42px; }
-        }
-      `}</style>
+    <main>
+      <header className="site-header">
+        <a className="brand" href="#top" aria-label="Mitchell Carpet Cleaning and Restoration home">
+          <span className="brand-mark">M<span>★</span></span>
+          <span className="brand-copy"><strong>MITCHELL</strong><small>CARPET CLEANING & RESTORATION</small></span>
+        </a>
+        <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Toggle navigation">{menuOpen ? '×' : '☰'}</button>
+        <nav className={menuOpen ? 'main-nav open' : 'main-nav'} aria-label="Main navigation">
+          {['SERVICES', 'BUILDERS', 'ABOUT', 'SERVICE AREA', 'CONTACT'].map((item) => <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`} onClick={() => setMenuOpen(false)}>{item}</a>)}
+          <a className="nav-phone" href="tel:9728240752">☎ <span>972-824-0752</span></a>
+          <a className="button button-gold nav-cta" href="#contact" onClick={() => setMenuOpen(false)}>REQUEST A QUOTE <span>↗</span></a>
+        </nav>
+      </header>
 
-      <section className="hero">
-        <div className="nav">
-          <div className="brandWrap">
-            <div className="mark">M</div>
-            <div>
-              <div className="brand">Mitchell</div>
-              <div className="sub">Carpet Cleaning & Restoration</div>
-            </div>
-          </div>
-          <a className="phone" href="tel:9728240752">972-824-0752</a>
+      <section className="hero" id="top">
+        <div className="hero-media" />
+        <div className="hero-content shell">
+          <p className="eyebrow">DFW CARPET CLEANING & PROPERTY RESTORATION</p>
+          <h1>CLEANER SPACES.<br /><em>STRONGER TOMORROWS.</em></h1>
+          <p className="hero-lead">Professional carpet cleaning, water damage restoration, specialty floor care and property recovery for North Texas homebuilders, property managers and homeowners.</p>
+          <div className="hero-actions"><a className="button button-gold" href="#contact">REQUEST A QUOTE <span>↗</span></a><a className="button button-outline" href="#services">EXPLORE OUR SERVICES <span>↓</span></a></div>
+          <a className="hero-call" href="tel:9728240752">CALL <strong>972-824-0752</strong> <span>↗</span></a>
         </div>
-
-        <div className="grid">
-          <div>
-            <div className="badge">DFW Builder, Warranty & Homeowner Support</div>
-            <h1>Specialty floor care, water cleanup, and restoration support.</h1>
-            <p className="lead">
-              Mitchell Carpet Cleaning & Restoration helps DFW builders, warranty departments, and homeowners with professional carpet cleaning, water extraction, drying, odor removal, subfloor issues, and specialty repairs.
-            </p>
-            <div className="actions">
-              <a className="btn" href="tel:9728240752">Call 972-824-0752</a>
-              <a className="btn secondary" href="mailto:mitchellrestorationdfw@gmail.com">Email Us</a>
-            </div>
-
-            <div className="stats">
-              <div className="stat"><strong>30+</strong><span>Years Experience</span></div>
-              <div className="stat"><strong>DFW</strong><span>Builder Support</span></div>
-              <div className="stat"><strong>Fast</strong><span>Clear Response</span></div>
-            </div>
-          </div>
-
-          <div className="card">
-            <div className="logoPanel">
-              <div className="bigM">M</div>
-              <div className="logoTitle">MITCHELL</div>
-              <div className="goldLine"></div>
-              <div className="logoSub">Carpet Cleaning & Restoration</div>
-            </div>
-            <div className="cardText">
-              <h2>Experienced problem solvers for jobs that need extra care.</h2>
-              <p>
-                Shawn Mitchell brings 30+ years of hands-on experience solving flooring, carpet, water, odor, and warranty issues across DFW homes and builder communities.
-              </p>
-            </div>
-          </div>
-        </div>
+        <div className="scroll-cue">SCROLL TO EXPLORE <span>↓</span></div>
       </section>
 
-      <section className="services">
-        <div className="sectionHead">
-          <div className="eyebrow">Services</div>
-          <h2>The services builders and homeowners call us for.</h2>
-          <p>From routine carpet cleaning to urgent water extraction and specialty warranty work, we help keep projects moving and homeowners taken care of.</p>
-        </div>
+      <section className="trust-strip"><div>30+ <span>YEARS FIELD EXPERIENCE</span></div><div>01 <span>BUILDER FOCUSED</span></div><div>DFW <span>& NORTH TEXAS</span></div><div>24/7 <span>RAPID RESPONSE</span></div></section>
 
-        <div className="serviceGrid">
-          <div className="service"><div className="icon">✦</div><h3>Water Extraction & Drying</h3><p>Fast response for water damage, drying equipment, moisture checks, and builder warranty support.</p></div>
-          <div className="service"><div className="icon">✦</div><h3>Carpet Cleaning</h3><p>Professional truck-mounted hot water extraction for homeowners, builders, and warranty teams.</p></div>
-          <div className="service"><div className="icon">✦</div><h3>Carpet Repairs</h3><p>Stretching, seam repair, specialty flooring issues, subfloor pops, creaks, and difficult repairs.</p></div>
-          <div className="service"><div className="icon">✦</div><h3>Moisture & Mold Prevention</h3><p>Thermal imaging, moisture detection, mold detection support, and preventative treatment options.</p></div>
-          <div className="service"><div className="icon">✦</div><h3>Odor Removal</h3><p>Dead animal odor removal, ozone treatment, air scrubbers, and deodorizing solutions.</p></div>
-          <div className="service"><div className="icon">✦</div><h3>Builder & Warranty Support</h3><p>Reliable vendor support for construction managers, warranty teams, and customer care departments.</p></div>
-        </div>
+      <section className="section services-section" id="services">
+        <div className="section-heading"><p className="eyebrow">WHAT WE DO</p><h2>RESTORATION THAT<br /><em>GETS THE JOB DONE.</em></h2><p>From everyday floor care to complex water and property damage, MCCR provides practical solutions backed by decades of hands-on field experience.</p></div>
+        <div className="service-grid">{services.map(([num, title, text, icon]) => <article className="service-card" key={title}><div className="service-top"><span className="service-number">{num}</span><span className="service-icon">{icon}</span></div><h3>{title}</h3><p>{text}</p><a href="#contact" aria-label={`Learn more about ${title}`}>LEARN MORE <span>↗</span></a></article>)}</div>
       </section>
 
-      <section className="split">
-        <div className="panel blue">
-          <div className="eyebrow">Builder Support</div>
-          <h2>Built for warranty teams, construction managers, and customer care.</h2>
-          <p>We understand timelines, homeowner expectations, warranty communication, and the importance of representing your company professionally inside every home.</p>
-          <ul>
-            <li>Construction manager and warranty support</li>
-            <li>Water extraction, drying equipment, and moisture documentation</li>
-            <li>Carpet stretching, seams, subfloor pops, and creaks</li>
-            <li>Clean job sites and homeowner-friendly communication</li>
-          </ul>
-        </div>
+      <section className="builder-section" id="builders"><div className="builder-image" /><div className="builder-content"><p className="eyebrow">BUILT FOR BUILDERS</p><h2>THE RESTORATION PARTNER THAT <em>KEEPS YOUR HOMES MOVING.</em></h2><p className="builder-intro">MCCR understands the demands of production homebuilding, warranty work and closing schedules. We provide responsive field service, clear documentation and practical solutions designed to help builder teams resolve problems quickly and keep projects moving.</p><div className="benefit-grid">{benefits.map(([title, text]) => <div className="benefit" key={title}><span className="benefit-line" /><div><h3>{title}</h3><p>{text}</p></div></div>)}</div><a className="button button-gold" href="#contact">BECOME A BUILDER PARTNER <span>↗</span></a></div></section>
 
-        <div className="panel">
-          <div className="eyebrow">Homeowners</div>
-          <h2>Clean, respectful service from start to finish.</h2>
-          <p>Whether you need carpet cleaning, odor removal, water extraction, or help with a flooring issue, our goal is to make the process easy, respectful, and professional from start to finish.</p>
-        </div>
-      </section>
+      <section className="section process-section"><div className="section-heading left"><p className="eyebrow">OUR APPROACH</p><h2>CLEAN. <em>RESTORE.</em><br />PROTECT.</h2><p>A straightforward process built around clear communication, quality workmanship and getting your property back in order.</p></div><div className="process-grid"><div className="process-image" /><div className="process-steps"><div><b>01</b><h3>CLEAN</h3><p>Professional cleaning and specialty floor care.</p></div><div><b>02</b><h3>RESTORE</h3><p>Water extraction, drying, damage removal and property recovery.</p></div><div><b>03</b><h3>PROTECT</h3><p>Moisture verification, treatment, documentation and preventative solutions.</p></div></div></div></section>
 
-      <section className="cta">
-        <div>
-          <div className="eyebrow">Call, Email, or Visit</div>
-          <h2>Ready when you need us.</h2>
-          <p>Fast communication, dependable service, and professional results across DFW.</p>
-        </div>
-        <a className="darkBtn" href="tel:9728240752">Call Now</a>
-      </section>
+      <section className="about-section" id="about"><div className="about-inner"><div><p className="eyebrow">WHO WE ARE</p><h2>BUILT ON EXPERIENCE.<br /><em>DRIVEN BY SERVICE.</em></h2></div><div className="about-copy"><p>Mitchell Carpet Cleaning & Restoration is a family-owned North Texas company focused on professional cleaning, restoration and builder support.</p><p>Our operations leadership brings more than 30 years of hands-on carpet cleaning and restoration field experience to every job. We believe in direct communication, practical problem solving and quality workmanship that earns long-term relationships.</p><div className="about-points"><span>DIRECT COMMUNICATION</span><span>LOCAL NORTH TEXAS SERVICE</span><span>QUALITY WORKMANSHIP</span></div></div></div></section>
 
-      <footer>
-        <div>© Mitchell Carpet Cleaning & Restoration LLC</div>
-        <div>972-824-0752 · mitchellrestorationdfw@gmail.com</div>
-      </footer>
+      <section className="area-section" id="service-area"><div className="area-map"><div className="map-ring ring-one" /><div className="map-ring ring-two" /><span className="map-label">DFW</span><span className="map-dot dot-dallas" /><span className="map-dot dot-fort" /></div><div className="area-content"><p className="eyebrow">WHERE WE WORK</p><h2>PROUDLY SERVING<br /><em>NORTH TEXAS.</em></h2><p>Dallas-Fort Worth is home base. We provide service throughout DFW and surrounding North Texas communities for homeowners, builders, property managers and commercial partners.</p><a className="text-link" href="#contact">CHECK YOUR SERVICE AREA <span>↗</span></a></div></section>
+
+      <section className="why-section"><div className="section-heading"><p className="eyebrow">WHY MCCR</p><h2>WHEN SOMETHING GOES WRONG,<br /><em>EXPERIENCE MATTERS.</em></h2></div><div className="why-grid"><div><strong>30+</strong><span>YEARS FIELD EXPERIENCE</span></div><div><strong>FAST</strong><span>RAPID RESPONSE</span></div><div><strong>BUILT</strong><span>BUILDER-FOCUSED SERVICE</span></div><div><strong>LOCAL</strong><span>LOCALLY OWNED</span></div></div><div className="reviews-note"><span>★★★★★</span><p>Real customer reviews coming soon. We are building this space for verified feedback from the people and teams we serve.</p></div></section>
+
+      <section className="final-cta"><div className="final-overlay" /><div className="final-content"><p className="eyebrow">READY WHEN YOU ARE</p><h2>LET&apos;S GET IT <em>DONE.</em></h2><p>Whether you need routine floor care, builder warranty support or help recovering from property damage, MCCR is ready to go to work.</p><div className="hero-actions"><a className="button button-gold" href="#contact">REQUEST A QUOTE <span>↗</span></a><a className="button button-outline" href="tel:9728240752">CALL 972-824-0752</a></div><div className="final-tag">CLEAN <span>•</span> RESTORE <span>•</span> PROTECT</div></div></section>
+
+      <section className="contact-section" id="contact"><div className="contact-intro"><p className="eyebrow">START A CONVERSATION</p><h2>TELL US WHAT<br /><em>YOU&apos;RE FACING.</em></h2><p>Send a few details and our team will follow up directly. For urgent water damage, call now.</p><a className="contact-phone" href="tel:9728240752">972-824-0752 <span>↗</span></a></div><form className="quote-form" onSubmit={(event) => event.preventDefault()}><div className="form-row"><label>Name<input required name="name" placeholder="Your name" /></label><label>Company / Builder<input name="company" placeholder="Company name" /></label></div><div className="form-row"><label>Phone<input required type="tel" name="phone" placeholder="972-000-0000" /></label><label>Email<input type="email" name="email" placeholder="you@company.com" /></label></div><label>Property Address<input name="address" placeholder="Street, city, ZIP" /></label><label>Service Needed<select name="service" defaultValue=""><option value="" disabled>Select a service</option><option>Water damage & extraction</option><option>Carpet cleaning & repair</option><option>Builder warranty support</option><option>Other restoration service</option></select></label><label>Tell Us What Happened<textarea name="details" rows="4" placeholder="Give us a quick overview of what you need..."></textarea></label><fieldset><legend>Preferred Contact Method</legend><label className="radio"><input type="radio" name="contact" defaultChecked /> Phone</label><label className="radio"><input type="radio" name="contact" /> Email</label><label className="radio"><input type="radio" name="contact" /> Text</label></fieldset><button className="button button-gold" type="submit">REQUEST SERVICE <span>↗</span></button></form></section>
+
+      <footer className="site-footer"><div className="footer-brand"><a className="brand" href="#top"><span className="brand-mark">M<span>★</span></span><span className="brand-copy"><strong>MITCHELL</strong><small>CARPET CLEANING & RESTORATION</small></span></a><p>Dallas-Fort Worth, Texas</p></div><div className="footer-links"><a href="#services">Services</a><a href="#builders">Builder Services</a><a href="#about">About</a><a href="#service-area">Service Area</a><a href="#contact">Contact</a></div><div className="footer-contact"><a href="tel:9728240752">972-824-0752</a><a href="mailto:mitchellrestorationdfw@gmail.com">mitchellrestorationdfw@gmail.com</a></div><div className="footer-bottom"><span>© {new Date().getFullYear()} Mitchell Carpet Cleaning & Restoration</span><strong>CLEAN <i>•</i> RESTORE <i>•</i> PROTECT</strong></div></footer>
     </main>
-  );
+  )
 }
