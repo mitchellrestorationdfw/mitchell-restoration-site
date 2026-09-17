@@ -25,8 +25,7 @@ export default function Home() {
     <main>
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Mitchell Carpet Cleaning and Restoration home">
-          <span className="brand-mark">M<span>★</span></span>
-          <span className="brand-copy"><strong>MITCHELL</strong><small>CARPET CLEANING & RESTORATION</small></span>
+          <span className="brand-mark" aria-hidden="true"><b>M</b><i>★</i></span><span className="brand-lockup"><strong>MCCR</strong><small>MITCHELL RESTORATION</small></span>
         </a>
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Toggle navigation">{menuOpen ? '×' : '☰'}</button>
         <nav className={menuOpen ? 'main-nav open' : 'main-nav'} aria-label="Main navigation">
@@ -48,7 +47,7 @@ export default function Home() {
         <div className="scroll-cue">SCROLL TO EXPLORE <span>↓</span></div>
       </section>
 
-      <section className="trust-strip"><div>30+ <span>YEARS FIELD EXPERIENCE</span></div><div>01 <span>BUILDER FOCUSED</span></div><div>DFW <span>& NORTH TEXAS</span></div><div>24/7 <span>RAPID RESPONSE</span></div></section>
+      <section className="trust-strip"><div>30+ <span>YEARS FIELD EXPERIENCE</span></div><div>BUILDER <span>& WARRANTY SPECIALISTS</span></div><div>DFW <span>& NORTH TEXAS</span></div><div>RAPID <span>RESPONSE</span></div></section>
 
       <section className="section services-section" id="services">
         <div className="section-heading"><p className="eyebrow">WHAT WE DO</p><h2>RESTORATION THAT<br /><em>GETS THE JOB DONE.</em></h2><p>From everyday floor care to complex water and property damage, MCCR provides practical solutions backed by decades of hands-on field experience.</p></div>
@@ -69,7 +68,7 @@ export default function Home() {
 
       <section className="contact-section" id="contact"><div className="contact-intro"><p className="eyebrow">START A CONVERSATION</p><h2>TELL US WHAT<br /><em>YOU&apos;RE FACING.</em></h2><p>Send a few details and our team will follow up directly. For urgent water damage, call now.</p><a className="contact-phone" href="tel:9728240752">972-824-0752 <span>↗</span></a></div><form className="quote-form" onSubmit={(event) => event.preventDefault()}><div className="form-row"><label>Name<input required name="name" placeholder="Your name" /></label><label>Company / Builder<input name="company" placeholder="Company name" /></label></div><div className="form-row"><label>Phone<input required type="tel" name="phone" placeholder="972-000-0000" /></label><label>Email<input type="email" name="email" placeholder="you@company.com" /></label></div><label>Property Address<input name="address" placeholder="Street, city, ZIP" /></label><label>Service Needed<select name="service" defaultValue=""><option value="" disabled>Select a service</option><option>Water damage & extraction</option><option>Carpet cleaning & repair</option><option>Builder warranty support</option><option>Other restoration service</option></select></label><label>Tell Us What Happened<textarea name="details" rows="4" placeholder="Give us a quick overview of what you need..."></textarea></label><fieldset><legend>Preferred Contact Method</legend><label className="radio"><input type="radio" name="contact" defaultChecked /> Phone</label><label className="radio"><input type="radio" name="contact" /> Email</label><label className="radio"><input type="radio" name="contact" /> Text</label></fieldset><button className="button button-gold" type="submit">REQUEST SERVICE <span>↗</span></button></form></section>
 
-      <footer className="site-footer"><div className="footer-brand"><a className="brand" href="#top"><span className="brand-mark">M<span>★</span></span><span className="brand-copy"><strong>MITCHELL</strong><small>CARPET CLEANING & RESTORATION</small></span></a><p>Dallas-Fort Worth, Texas</p></div><div className="footer-links"><a href="#services">Services</a><a href="#builders">Builder Services</a><a href="#about">About</a><a href="#service-area">Service Area</a><a href="#contact">Contact</a></div><div className="footer-contact"><a href="tel:9728240752">972-824-0752</a><a href="mailto:mitchellrestorationdfw@gmail.com">mitchellrestorationdfw@gmail.com</a></div><div className="footer-bottom"><span>© {new Date().getFullYear()} Mitchell Carpet Cleaning & Restoration</span><strong>CLEAN <i>•</i> RESTORE <i>•</i> PROTECT</strong></div></footer>
+      <footer className="site-footer"><div className="footer-brand"><a className="brand" href="#top"><span className="brand-mark" aria-hidden="true"><b>M</b><i>★</i></span><span className="brand-lockup"><strong>MCCR</strong><small>MITCHELL RESTORATION</small></span></a><p>Dallas-Fort Worth, Texas</p></div><div className="footer-links"><a href="#services">Services</a><a href="#builders">Builder Services</a><a href="#about">About</a><a href="#service-area">Service Area</a><a href="#contact">Contact</a></div><div className="footer-contact"><a href="tel:9728240752">972-824-0752</a><a href="mailto:mitchellrestorationdfw@gmail.com">mitchellrestorationdfw@gmail.com</a></div><div className="footer-bottom"><span>© {new Date().getFullYear()} Mitchell Carpet Cleaning & Restoration</span><strong>CLEAN <i>•</i> RESTORE <i>•</i> PROTECT</strong></div></footer>
     </main>
   )
 }
